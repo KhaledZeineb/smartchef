@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SmartChef - Modifier un Ingrédient{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <h1 class="card-title">Modifier l'ingrédient</h1>
+
+        {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_label(form.ingredient) }}
+                {{ form_widget(form.ingredient) }}
+                {{ form_errors(form.ingredient) }}
+            </div>
+            
+            <div class="form-group">
+                {{ form_label(form.quantity) }}
+                {{ form_widget(form.quantity) }}
+                {{ form_errors(form.quantity) }}
+            </div>
+            
+            <div class="form-group">
+                {{ form_label(form.unit) }}
+                {{ form_widget(form.unit) }}
+                {{ form_errors(form.unit) }}
+            </div>
+
+            <div class="actions">
+                <button type="submit" class="btn">Enregistrer</button>
+                <a href="{{ path('app_user_ingredient_index') }}" class="btn btn-secondary">Retour à la liste</a>
+            </div>
+        {{ form_end(form) }}
+        
+        <div style="margin-top: 2rem;">
+            <form method="post" action="{{ path('app_user_ingredient_delete', {'id': user_ingredient.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet ingrédient ?');">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user_ingredient.id) }}">
+                <button class="btn btn-danger">Supprimer</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

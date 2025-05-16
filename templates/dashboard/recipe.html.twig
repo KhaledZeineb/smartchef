@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SmartChef - Recette Générée{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <h1 class="card-title">Recette Générée par IA 👨‍🍳</h1>
+        <p>Voici une recette créée spécialement pour vous, basée sur les ingrédients de votre frigo :</p>
+        
+        <div class="recipe">
+            {{ recipe|nl2br }}
+        </div>
+        
+        <div class="actions">
+            <a href="{{ path('app_dashboard') }}" class="btn btn-secondary">Retour à mon frigo</a>
+            <form method="post" action="{{ path('app_generate_recipe') }}" style="display: inline;">
+                <button type="submit" class="btn">Générer une autre recette</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

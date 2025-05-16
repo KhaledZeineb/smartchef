@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SmartChef - Mon Frigo{% endblock %}
+
+{% block body %} <div class="card"> <h1 class="card-title">Mon Frigo 🧊</h1>
+
+    {% if userIngredients|length > 0 %}
+        <p>Voici les ingrédients actuellement dans votre frigo :</p>
+        
+        <div class="ingredient-list">
+            {% for userIngredient in userIngredients %}
+                <div class="ingredient-card">
+                    <div class="ingredient-name">{{ userIngredient.ingredient.name }}</div>
+                    <div class="ingredient-quantity">
+                        {% if userIngredient.quantity %}
+                            {{ userIngredient.quantity }} {{ userIngredient.unit }}
+                        {% else %}
+                            Quantité non spécifiée
+                        {% endif %}
+                    </div>
+                    <div style="margin-top: 0.8rem;">
+                        <a href="{{ path('app_user_ingredient_edit', {'id': userIngredient.id}) }}" class="btn btn-secondary" style="padding: 5px 10px; font-size: 0.9rem;">Modifier</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div class="actions">
+            <a href="{{ path('app_user_ingredient_new') }}" class="btn">Ajouter un ingrédient</a>
+            <form method="post" action="{{ path('app_generate_recipe') }}" style="display: inline;">
+                <button type="submit" class="btn">Générer une recette</button>
+            </form>
+        </div>
+    {% else %}
+        <p>Votre frigo est vide ! Commencez par ajouter des ingrédients.</p>
+        <div class="actions">
+            <a href="{{ path('app_user_ingredient_new') }}" class="btn">Ajouter mon premier ingrédient</a>
+        </div>
+    {% endif %}
+</div>
+
+
+{% endblock %}

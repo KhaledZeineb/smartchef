@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SmartChef - Mes Ingrédients{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <h1 class="card-title">Mes Ingrédients 🥕</h1>
+
+        <div class="actions" style="margin-bottom: 1.5rem;">
+            <a href="{{ path('app_user_ingredient_new') }}" class="btn">Ajouter un ingrédient</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Ingrédient</th>
+                    <th>Quantité</th>
+                    <th>Unité</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user_ingredient in user_ingredients %}
+                <tr>
+                    <td>{{ user_ingredient.ingredient.name }}</td>
+                    <td>{{ user_ingredient.quantity }}</td>
+                    <td>{{ user_ingredient.unit }}</td>
+                    <td>
+                        <a href="{{ path('app_user_ingredient_show', {'id': user_ingredient.id}) }}" class="btn btn-secondary" style="padding: 5px 10px; font-size: 0.9rem;">Détails</a>
+                        <a href="{{ path('app_user_ingredient_edit', {'id': user_ingredient.id}) }}" class="btn" style="padding: 5px 10px; font-size: 0.9rem;">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucun ingrédient trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="actions">
+            <a href="{{ path('app_dashboard') }}" class="btn btn-secondary">Retour au frigo</a>
+        </div>
+    </div>
+{% endblock %}

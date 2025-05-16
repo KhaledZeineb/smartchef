@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SmartChef - Accueil{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <h1 class="card-title">Bienvenue sur SmartChef - Mon Frigo Intelligent 🍳</h1>
+        <p>L'application qui vous aide à réduire le gaspillage alimentaire et à cuisiner avec ce que vous avez déjà chez vous !</p>
+        
+        <div style="margin: 2rem 0; text-align: center;">
+            <img src="/images/favicon.jpeg" alt="SmartChef Illustration" style="max-width: 100%; border-radius: 8px;">
+        </div>
+        
+        <h2 style="color: #4CAF50; margin-bottom: 1rem;">Comment ça marche ?</h2>
+        <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+            <li>Inscrivez-vous ou connectez-vous à votre compte</li>
+            <li>Ajoutez les ingrédients disponibles dans votre frigo</li>
+            <li>Demandez à notre IA de vous suggérer une recette adaptée</li>
+            <li>Suivez les instructions et régalez-vous !</li>
+        </ol>
+        
+        <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 2rem;">
+            {% if app.user %}
+                <a href="{{ path('app_dashboard') }}" class="btn">Accéder à mon frigo</a>
+            {% else %}
+                <a href="{{ path('app_register') }}" class="btn">Inscription</a>
+                <a href="{{ path('app_login') }}" class="btn btn-secondary">Connexion</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
